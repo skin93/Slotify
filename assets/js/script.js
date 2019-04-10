@@ -1,7 +1,22 @@
 var currentPlaylist = [];
+var shufflePlaylist = [];
+var tempPlaylist = [];
 var audioElement;
 var mouseDown = false;
+var currentIndex = 0;
+var repeat = false;
+var shuffle = false;
+var userLoggedIn;
 
+function openPage(url){
+
+    if(url.indexOf("?") == -1){
+        url = url + "?";
+    }
+
+    var encodedUrl = encodeURI(url + "&userLoggedIn=" + userLoggedIn);
+    $("#mainContent").load(encodedUrl);
+}
 
 function formatTime(seconds){
     var time = Math.round(seconds);
@@ -31,6 +46,10 @@ function Audio() {
 
 	this.currentlyPlaying;
     this.audio = document.createElement('audio');
+
+    this.audio.addEventListener("ended", function(){
+        nextSong();
+    });
 
     this.audio.addEventListener("canplay", function(){
         //this refers to the object that the event was called on
