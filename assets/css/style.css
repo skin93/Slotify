@@ -389,6 +389,7 @@ body {
 
 .tracklistContainer h2,
 .gridViewContainter h2,
+.playlistsContainer h2,
 .artistsContainer h2 {
     text-align: center;
 }
@@ -436,6 +437,20 @@ input:focus{
 .noResults{
     margin: 15px;
     display: block;
+}
+
+.buttonItems .button{
+    margin: 0 auto 20px auto;
+    display: block;
+}
+
+.playlistsContainer{
+    padding: 10px 0;
+}
+
+.playlistImage{
+    border: 3px solid #282828;
+    padding: 10px;
 }
 
 
