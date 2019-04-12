@@ -369,7 +369,7 @@ body {
     cursor: pointer;
     margin-bottom: 10px;
     background-color: transparent;
-    font-weight: 50;
+    font-weight: 500;
     letter-spacing: 2px;
     border: 2px solid #fff;
     border-radius: 500px;
@@ -377,7 +377,7 @@ body {
     min-width: 130px;
 }
 
-.button.green{
+.button.green {
     background-color: #2ebd59;
     border-color: #2ebd59;
 }
@@ -388,27 +388,26 @@ body {
 }
 
 .tracklistContainer h2,
-.gridViewContainter h2,
-.playlistsContainer h2,
+.gridViewContainer h2,
 .artistsContainer h2 {
     text-align: center;
 }
 
-[role="link"]{
+[role="link"] {
     cursor: pointer;
 }
 
-.searchContainer{
+.searchContainer {
     background-color: #242424;
-    padding: 20px 20px;
+    padding: 20px 28px;
 }
 
-.searchContainer h4{
+.searchContainer h4 {
     margin: 0;
     font-weight: 300;
 }
 
-.searchInput{
+.searchContainer .searchInput {
     width: 100%;
     background-color: transparent;
     border: none;
@@ -418,54 +417,74 @@ body {
     letter-spacing: 2px;
 }
 
-input:focus{
+input:focus {
     outline: none;
 }
 
-.searchResultRow{
+.searchResultRow {
     padding: 15px 10px;
 }
 
-.searchResultRow:hover{
+.searchResultRow:hover {
     background-color: #282828;
 }
 
-.searchResultRow .artistName span{
+.searchResultRow .artistName span {
     color: #fff;
 }
 
-.noResults{
+.noResults {
     margin: 15px;
     display: block;
 }
 
-.buttonItems .button{
-    margin: 0 auto 20px auto;
+.buttonItems .button {
     display: block;
+    margin: 0 auto 20px auto;
 }
 
-.playlistsContainer{
+.playlistsContainer {
     padding: 10px 0;
 }
 
-.playlistImage{
+
+.playlistImage {
     border: 3px solid #282828;
     padding: 10px;
 }
 
+.optionsMenu {
+    position: fixed;
+    background-color: #282828;
+    width: 200px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    z-index: 1000;
+    display: none;
+}
 
+.optionsMenu .item {
+    width: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    font-weight: 400;
+    color: rgba(147, 147, 147, 0.8);
+    cursor: pointer;
+    height: 40px;
+    background-color: #282828;
+    font-size: 14px;
+}
 
+.optionsMenu .item:hover {
+    color: #fff;
+    background-color: #333;
+    border-color: #333;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.optionsMenu select {
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
 
 

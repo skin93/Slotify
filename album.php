@@ -1,75 +1,91 @@
 <?php include("includes/includedFiles.php");
-    if(isset($_GET['id']))
-    {
-        $albumId = $_GET['id'];
-    }
-    else
-    {
-        header("Location: index.php");
-    }
 
-    $album = new Album($con, $albumId);
-    $artist = $album->getArtist();
-    $artistId = $artist->getId();
+if(isset($_GET['id'])) {
+	$albumId = $_GET['id'];
+}
+else {
+	header("Location: index.php");
+}
+
+$album = new Album($con, $albumId);
+$artist = $album->getArtist();
+$artistId = $artist->getId();
 ?>
 
 <div class="entityInfo">
 
-    <div class="leftSection">
-        <img src="<?php echo $album->getArtworkPath(); ?>">
-    </div>
+	<div class="leftSection">
+		<img src="<?php echo $album->getArtworkPath(); ?>">
+	</div>
 
-    <div class="rightSection">
-        <h2><?php echo $album->getTitle(); ?></h2>
-        <p role="link" tabindex="0" onclick="openPage('artist.php?id=$artistId')">By <?php echo $artist->getName(); ?></p>
-        <p><?php echo $album->getNumberOfSongs(); ?> songs</p>
-    </div>
+	<div class="rightSection">
+		<h2><?php echo $album->getTitle(); ?></h2>
+		<p role="link" tabindex="0" onclick="openPage('artist.php?id=$artistId')">By <?php echo $artist->getName(); ?></p>
+		<p><?php echo $album->getNumberOfSongs(); ?> songs</p>
+
+	</div>
+
 </div>
+
 
 <div class="tracklistContainer">
-    <ul class="tracklist">
-        <?php
-            $songIdArray = $album->getSongIds();
-            $i = 1;
-            foreach($songIdArray as $songId)
-            {
-                $albumSong = new Song($con, $songId);
-                $albumArtist = $albumSong->getArtist();
+	<ul class="tracklist">
+		
+		<?php
+		$songIdArray = $album->getSongIds();
 
-                echo "<li class='tracklistrow'>
-                    <div class='trackCount'>
-                        <img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"". $albumSong->getId() ."\", tempPlaylist, true)'>
-                        <span class='trackNumber'>$i</span>
+		$i = 1;
+		foreach($songIdArray as $songId) {
 
-                        </span>
-                    </div>
+			$albumSong = new Song($con, $songId);
+			$albumArtist = $albumSong->getArtist();
 
-                    <div class='trackInfo'>
-                        <span class='trackName'>".$albumSong->getTitle(). "</span>
-                        <span class='artistName'>". $albumArtist->getName(). "</span>
-                    </div>
+			echo "<li class='tracklistRow'>
+					<div class='trackCount'>
+						<img class='play' src='assets/images/icons/play-white.png' onclick='setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
+						<span class='trackNumber'>$i</span>
+					</div>
 
-                    <div class='trackOptions'>
-                        <img class='optionButton' src='assets/images/icons/more.png'>
-                    </div>
 
-                    <div class='trackDuration'>
-                        <span class='duration'>". $albumSong->getDuration()." </span>
-                    </div>
+					<div class='trackInfo'>
+						<span class='trackName'>" . $albumSong->getTitle() . "</span>
+						<span class='artistName'>" . $albumArtist->getName() . "</span>
+					</div>
 
-                </li>";
+					<div class='trackOptions'>
+						<input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
+						<img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
+					</div>
 
-                $i++;
-            }
+					<div class='trackDuration'>
+						<span class='duration'>" . $albumSong->getDuration() . "</span>
+					</div>
 
-        ?>
 
-        <script>
-            var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
-            tempPlaylist = JSON.parse(tempSongIds);
-        </script>
-    </ul>
+				</li>";
+
+			$i++;
+		}
+
+		?>
+
+		<script>
+			var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+			tempPlaylist = JSON.parse(tempSongIds);
+		</script>
+
+	</ul>
 </div>
+
+
+<nav class="optionsMenu">
+	<input type="hidden" class="songId">
+	<?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
+</nav>
+
+
+
+
 
 
 
